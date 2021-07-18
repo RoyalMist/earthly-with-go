@@ -10,6 +10,10 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^10.3.1",
+    "postcss": "^8.3.5",
+    "solid-app-router": "^0.0.51",
+    "tailwindcss": "^2.2.4",
     "vite": "^2.4.2",
     "vite-plugin-solid": "^2.0.0"
   },
