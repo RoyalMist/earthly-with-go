@@ -71,25 +71,25 @@ docker:
     ENTRYPOINT ["/opt/wiatt"]
     SAVE IMAGE royalmist/wiatt:latest
 
-binary-linux:
-    FROM +backend-add-frontend
+linux:
+    FROM +backend-base
     RUN GOOS=linux go build -ldflags "-s -w" -o wiatt
-    SAVE ARTIFACT wiatt AS LOCAL ./artifacts/wiatt
+    SAVE ARTIFACT wiatt AS LOCAL ./artifacts/linux/wiatt
 
-binary-windows:
-    FROM +backend-add-frontend
+windows:
+    FROM +backend-base
     RUN GOOS=windows go build -ldflags "-s -w" -o wiatt.exe
-    SAVE ARTIFACT wiatt.exe AS LOCAL ./artifacts/wiatt.exe
+    SAVE ARTIFACT wiatt.exe AS LOCAL ./artifacts/windows/wiatt.exe
 
-binary-darwin:
-    FROM +backend-add-frontend
-    RUN GOOS=darwin go build -ldflags "-s -w" -o wiatt-darwin
-    SAVE ARTIFACT wiatt-darwin AS LOCAL ./artifacts/wiatt-darwin
+osx:
+    FROM +backend-base
+    RUN GOOS=darwin go build -ldflags "-s -w" -o wiatt
+    SAVE ARTIFACT wiatt AS LOCAL ./artifacts/osx/wiatt
 
-binaries:
-    BUILD +binary-linux
-    BUILD +binary-windows
-    BUILD +binary-darwin
+all:
+    BUILD +linux
+    BUILD +windows
+    BUILD +osx
 
 quality:
     BUILD +backend-quality
