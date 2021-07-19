@@ -15,7 +15,7 @@ var efs embed.FS
 
 func main() {
 	app := fiber.New()
-	app.Get("/api/hello", func(ctx *fiber.Ctx) error {
+	app.Get("/backend/hello", func(ctx *fiber.Ctx) error {
 		return ctx.SendString("Hello from Wiatt")
 	})
 
@@ -29,5 +29,5 @@ func main() {
 		NotFoundFile: "index.html",
 	}))
 
-	log.Fatal(app.Listen(":2000"))
+	log.Fatal(app.Listen(":4000"))
 }
