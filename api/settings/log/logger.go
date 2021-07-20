@@ -7,10 +7,10 @@ import (
 	"go.uber.org/zap"
 )
 
-// Module permits create a FX module.
+// Module makes the injectable available for FX.
 var Module = fx.Provide(New)
 
-// New create a new instance.
+// New creates a new injectable.
 func New() (*zap.SugaredLogger, error) {
 	logger, err := zap.NewProduction()
 	if err != nil {

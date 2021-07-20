@@ -7,6 +7,7 @@ import (
 	"wiatt/api/settings/server"
 )
 
+// Module makes the collection of injectables available for FX.
 var Module = fx.Options(
 	config.Module,
 	log.Module,

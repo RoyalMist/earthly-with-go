@@ -35,10 +35,10 @@ func (c Config) ApiHost() string {
 	return c.apiHost
 }
 
-// Module permits create a FX module.
+// Module makes the injectable available for FX.
 var Module = fx.Provide(New)
 
-// New create a new instance.
+// New creates a new injectable.
 func New() *Config {
 	viper.SetDefault(ApiHost, ":4000")
 	viper.SetDefault(dbDriver, "postgres")

@@ -10,10 +10,10 @@ import (
 	"wiatt/api/settings/config"
 )
 
-// Module permits create a FX module.
+// Module makes the injectable available for FX.
 var Module = fx.Provide(New)
 
-// New create a new instance.
+// New creates a new injectable.
 func New(lifecycle fx.Lifecycle, logger *zap.SugaredLogger, config *config.Config) (app *fiber.App, err error) {
 	lifecycle.Append(fx.Hook{
 		OnStart: func(ctx context.Context) (err error) {
