@@ -35,4 +35,6 @@ jobs:
       - name: Run quality checks
         run: earthly -P +quality
       - name: Build Docker image
-        run: earthly --push +docker
+        run: earthly +docker
+      - name: Push Docker image
+        run: docker push royalmist/wiatt

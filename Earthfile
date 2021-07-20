@@ -31,12 +31,12 @@ frontend-build:
 
 backend-base:
     WORKDIR /build
-    COPY go.mod .
-    COPY go.sum .
-    COPY main.go .
-    COPY api api
+    COPY go.mod go.sum .
+    RUN go mod download
     RUN mkdir web
     COPY +frontend-build/dist web/dist
+    COPY api api
+    COPY main.go .
 
 backend-quality:
     FROM +backend-base
@@ -62,14 +62,15 @@ docker:
     RUN apk update && \
         apk upgrade && \
         apk add --no-cache \
-        ca-certificates && \
+        ca-certificates \
+        tar && \
         update-ca-certificates && \
         chown -R nobody:nobody /opt/wiatt && \
         apk del ca-certificates
     USER nobody:nobody
     EXPOSE 4000
     ENTRYPOINT ["/opt/wiatt"]
-    SAVE IMAGE --push royalmist/wiatt:latest
+    SAVE IMAGE royalmist/wiatt
 
 linux:
     FROM +backend-base
