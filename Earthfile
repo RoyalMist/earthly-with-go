@@ -34,7 +34,7 @@ backend-base:
     COPY go.mod .
     COPY go.sum .
     COPY main.go .
-    COPY backend backend
+    COPY api api
     RUN mkdir web
     COPY +frontend-build/dist web/dist
 

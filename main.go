@@ -8,14 +8,22 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
+	"go.uber.org/fx"
+	"wiatt/api"
 )
 
 //go:embed web/dist
 var efs embed.FS
 
 func main() {
-	app := fiber.New()
-	app.Get("/backend/hello", func(ctx *fiber.Ctx) error {
+	fx.New(
+		fx.Options(api.Module),
+		fx.Invoke(start),
+	).Run()
+}
+
+func start(app *fiber.App) {
+	app.Get("/api/hello", func(ctx *fiber.Ctx) error {
 		return ctx.SendString("Hello from Wiatt")
 	})
 
@@ -28,6 +36,4 @@ func main() {
 		Root:         http.FS(web),
 		NotFoundFile: "index.html",
 	}))
-
-	log.Fatal(app.Listen(":4000"))
 }
