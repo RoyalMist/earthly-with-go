@@ -70,7 +70,7 @@ docker:
     USER nobody:nobody
     EXPOSE 4000
     ENTRYPOINT ["/opt/wiatt"]
-    SAVE IMAGE royalmist/wiatt
+    SAVE IMAGE --push royalmist/wiatt:latest
 
 linux:
     FROM +backend-base
